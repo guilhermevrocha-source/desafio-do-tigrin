@@ -28,7 +28,7 @@ public class tigrin {
         int pontos = 0;
         
         
-        // Carga com numeros aleatÃ³rios
+
         for (int iSorteio = 0; iSorteio < mSorteio.length; iSorteio++) {
             
             mSorteio[iSorteio] = sorteiaNumero(mSorteio, iSorteio);
@@ -38,7 +38,7 @@ public class tigrin {
         }
         System.out.println("");
         
-        // Conversar com usuÃ¡rio
+    
         for (int iUsuario = 0; iUsuario < 4; iUsuario++) {
             
             System.out.printf("Seu numero: ");
@@ -51,7 +51,7 @@ public class tigrin {
             for (int iSorteio = 0; iSorteio < mSorteio.length; iSorteio++) {
                 
                 if (mUsuario[iUsuario] == mSorteio[iSorteio]) {
-                    // Opa! Acertou miseravii
+
                     pontos++;
                     break;
                 }
@@ -67,21 +67,16 @@ public class tigrin {
         
     }
     
-    /**
-     * Sorteia um numero unico com base nos numeros fornecidos pela mSorteados
-     * 
-     * @param mSorteados - matriz de numeros jÃ¡ sorteados
-     * @param max - posicao do sorteio atual para economizar processamento
-     * @return numero Ãºnico nÃ£o repetido.
-     */
+
+     
     public static int sorteiaNumero(int[] mSorteados, int max) {
         
-        // inicia em True sÃ³ pra entrar no While
+      
         boolean flagRepetido = true;
         int temp = 0;
         
         while (flagRepetido) {    
-            flagRepetido = false;    // Todo mundo Ã© novidade atÃ© que se prove ao contrÃ¡rio!
+            flagRepetido = false;    
             
             temp = random.nextInt(12);
             // Verifica se existe na matriz mSorteados
