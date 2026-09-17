@@ -1,14 +1,36 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package desafio;
 
 import java.util.Scanner;
 
 public class atvidadedelogin {
 
+    
+    
+    
     public static void main(String[] args) {
+        
+        Aluno a1= new Aluno();
+        a1.id = 100;
+        a1.nome = "vargas";
+        a1.telefone = 67676767;
+        a1.dia = 18;
+        a1.mes = 01;
+        a1.ano= 2010;
+                
+        //                            id      nome tel d  m  a       idade
+        System.out.printf("%d - %s %d - %d%d%d - %d\n",
+         a1.id = 100,
+        a1.nome = "vargas",
+        a1.telefone = 8067,
+        a1.dia = 18,
+        a1.mes = 0,
+        a1.ano= 2010,
+        a1.calculaidade () );
+    }
+    
+    
+    public static void main2(String[] args) {
         Scanner entrada = new Scanner(System.in);
 
         int[] id = new int[3];
