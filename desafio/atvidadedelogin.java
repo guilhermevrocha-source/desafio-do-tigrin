@@ -1,6 +1,9 @@
 
 package desafio;
 
+import static java.time.Instant.MAX;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class atvidadedelogin {
@@ -8,7 +11,7 @@ public class atvidadedelogin {
     
     
     
-    public static void main(String[] args) {
+    public static void main2(String[] args) {
         
         Aluno a1= new Aluno();
         a1.id = 100;
@@ -18,50 +21,46 @@ public class atvidadedelogin {
         a1.mes = 01;
         a1.ano= 2010;
                 
-        //                            id      nome tel d  m  a       idade
-        System.out.printf("%d - %s %d - %d%d%d - %d\n",
-         a1.id = 100,
-        a1.nome = "vargas",
-        a1.telefone = 8067,
-        a1.dia = 18,
-        a1.mes = 0,
-        a1.ano= 2010,
-        a1.calculaidade () );
+        System.out.printf(a1.toString());
+   
+        Aluno a2 = new Aluno (110 ,"tung tung",999,10, 11,2000 );
+        System.out.println(a2.toString);
     }
     
     
-    public static void main2(String[] args) {
-        Scanner entrada = new Scanner(System.in);
+    public static void main(String[] args) {
+        Scanner scanner  = new Scanner(System.in);
 
-        int[] id = new int[3];
-        String[] nome = new String[3];
-        long[] telefone = new long[3];
-        int[] dia = new int[3];
-        int[] mes = new int[3];
-        int[] ano = new int[3]; //
-        int total = 0;
+       //Aluno[] ListaAluno = new Aluno[MAX];
+        List<Aluno> ListaAluno = new ArrayList <>();
+                Scanner tecladoTexto = new Scanner(System.in);
+                Scanner tecladoNumero= new Scanner(System.in);
 
-        for (int i = 0; i < 3; i++) {
+        do {
+            
+            Aluno nvovoAluno =new Aluno();
             System.out.println("\n--- cadastro aluno " + (i + 1) + " ---");
 
             System.out.println("id:");
-            id[i] = entrada.nextInt();
-            entrada.nextLine();
+            novoAluno.id =tecladoTexto.nextInt();
+            
 
             System.out.println("nome:");
-            nome[i] = entrada.nextLine();
+               novoAluno.nome= tecladoTexto.nextLine();
 
             System.out.println("telefone:");
-            telefone[i] = entrada.nextLong();
+               novoAluno.telefone= tecladoNumero.nextLong();
 
             System.out.println("dia:");
-            dia[i] = entrada.nextInt();
+                novoAluno.dia = tecladoNumero.nextInt();
 
             System.out.println("mes:");
-            mes[i] = entrada.nextInt();
+               novoAluno.mes = tecladoNumero.nextInt();
 
             System.out.println("ano:");
-            ano[i] = entrada.nextInt();
+              novoAluno.ano = tecladoNumero.nextInt();
+              
+              ListaAluno.add(novoAluno);
 
             total++;
 
