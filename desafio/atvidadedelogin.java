@@ -73,4 +73,4 @@ public class atvidadedelogin {
             System.out.println(aluno.id + " | " + aluno.nome + " | " + aluno.telefone + " | " + datadeNascimento);
         }
     }
-}
+}   
