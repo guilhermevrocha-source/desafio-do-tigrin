@@ -18,7 +18,7 @@ public class atvidadedelogin {
                 
         System.out.println(a1.toString());
    
-        Aluno a2 = new Aluno(110, "tung tung", 999, 10, 11, 2000);
+         Aluno a2 = new Aluno(110, "tung tung", 999, 10, 11, 2000);
         System.out.println(a2.toString()); // Adicionado () em toString()
     }
 
