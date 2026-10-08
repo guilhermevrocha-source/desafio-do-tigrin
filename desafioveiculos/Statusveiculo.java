@@ -8,6 +8,7 @@ package desafioveiculos;
  *
  * @author sesi2dia
  */
-public class Statusveiculo {
-    
+public enum Statusveiculo {
+    PATIO,
+    RUA
 }

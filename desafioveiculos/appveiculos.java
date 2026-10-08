@@ -1,18 +1,23 @@
 package desafioveiculos;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class appveiculos {
 
+    public static Scanner teclado = new Scanner(System.in);
+    public static List<veiculos> listaVeiculos = new ArrayList<>();
+
     public static void main(String[] args) {
-        Scanner teclado = new Scanner(System.in);
-        ArrayList<veiculos> listaVeiculos = new ArrayList<>();
+
         int opcao = 0;
 
-        do {
-            System.out.println("----------------------------------------");
+        while (opcao != 99) {
+
+            System.out.println("\n------------------------------------------");
             System.out.println("Controle de Veículos");
-            System.out.println("----------------------------------------");
+            System.out.println("------------------------------------------");
             System.out.println("10-Incluir veículo");
             System.out.println("11-Listar veículos");
             System.out.println("20-Saída de veículo");
@@ -20,141 +25,106 @@ public class appveiculos {
             System.out.println("30-Entrada de veículo");
             System.out.println("31-Relatório de veículos no pátio.");
             System.out.println("99-Sair");
-            System.out.print("Digite a opção: ");
+            System.out.println("");
+            System.out.print("Digite uma opção: ");
 
-            opcao = Integer.parseInt(teclado.nextLine());
+            opcao = teclado.nextInt();
 
-            // 10 - INCLUIR VEÍCULO
-            if (opcao == 10) {
-                System.out.println("\n--- Cadastrar Veículos ---");
-                do {
-                    veiculos v = new veiculos();
-
-                    System.out.print("Placa (ENTER para voltar): ");
-                    v.placa = teclado.nextLine();
-
-                    if (v.placa.isBlank()) {
-                        break;
-                    }
-
-                    System.out.print("Marca: ");
-                    v.marca = teclado.nextLine();
-
-                    System.out.print("Modelo: ");
-                    v.modelo = teclado.nextLine();
-
-                    v.status = 0; // 0 = Pátio
-                    v.motorista = "";
-
-                    listaVeiculos.add(v);
-                    System.out.println("Veículo cadastrado!\n");
-                } while (true);
-            }
-
-            // 11 - LISTAR TODOS
-            else if (opcao == 11) {
-                System.out.println("\n--- LISTA DE TODOS OS VEÍCULOS ---");
-                System.out.println("Placa    | Modelo       | Marca        | Motorista       | Status  ");
-                System.out.println("-------------------------------------------------------------------");
-                for (veiculos v : listaVeiculos) {
-                    System.out.println(v);
+            switch (opcao) {
+                case 10 -> incluirVeiculo();
+                case 11 -> {
+                    System.out.println("Você escolheu Listar Veículos");
+                    listarVeiculos();
                 }
-                System.out.println();
-            }
-
-            // 20 - SAÍDA DE VEÍCULO
-            else if (opcao == 20) {
-                System.out.print("\nPlaca para saída: ");
-                String placaSaida = teclado.nextLine();
-
-                veiculos vSaida = null;
-                for (veiculos v : listaVeiculos) {
-                    if (v.placa.equalsIgnoreCase(placaSaida)) {
-                        vSaida = v;
-                        break;
-                    }
+                case 20 -> {
+                    System.out.println("\nSaída de Veículos\n");
+                    saidaVeiculo();
                 }
-
-                if (vSaida == null) {
-                    System.out.println("Erro: Veículo não encontrado!\n");
-                } else if (vSaida.status == 1) {
-                    System.out.println("Atenção: O veículo já está na rua!\n");
-                } else {
-                    System.out.println("Veículo: " + vSaida.modelo + " / " + vSaida.marca);
-                    System.out.print("Nome do motorista: ");
-                    vSaida.motorista = teclado.nextLine();
-                    vSaida.status = 1; // 1 = Linha (rua)
-                    System.out.println("Saída registrada!\n");
+                case 21 -> relatorioVeiculoLinha();
+                case 30 -> {
+                    System.out.println("\nEntrada de Veículos\n");
+                    entrarVeiculo();
                 }
+                case 31 -> relatorioPatio();
+                case 99 -> System.out.println("Saindo do sistema...");
+                default -> System.out.println("Opção inválida! Tente novamente.");
             }
+        }
+    }
 
-            // 21 - RELATÓRIO EM LINHA
-            else if (opcao == 21) {
-                System.out.println("\n--- VEÍCULOS EM LINHA (RUA) ---");
-                System.out.println("Placa    | Modelo       | Marca        | Motorista       | Status  ");
-                System.out.println("-------------------------------------------------------------------");
-                for (veiculos v : listaVeiculos) {
-                    if (v.status == 1) {
-                        System.out.println(v);
-                    }
-                }
-                System.out.println();
+    // 10 - Incluir veículo
+    public static void incluirVeiculo() {
+        System.out.println("\n--- Cadastro de Veículos ---");
+
+        System.out.print("Placa: ");
+        String placa = teclado.next();
+
+        System.out.print("Marca: ");
+        String marca = teclado.next();
+
+        System.out.print("Modelo: ");
+        String modelo = teclado.next();
+
+        veiculos veic = new veiculos(placa, marca, modelo);
+        listaVeiculos.add(veic);
+        System.out.println("Veículo cadastrado com sucesso!");
+    }
+
+    // 11 - Listar veículos
+    public static void listarVeiculos() {
+        System.out.println("-".repeat(50));
+        System.out.println("Relatório de Veículos");
+        System.out.println("-".repeat(50));
+        System.out.println("Placa\tModelo\tMarca");
+        System.out.println("-".repeat(50));
+
+        if (listaVeiculos.isEmpty()) {
+            System.out.println("Nenhum veículo cadastrado.");
+        } else {
+            for (veiculos v : listaVeiculos) {
+                // Certifique-se de que sua classe 'veiculos' possui os métodos get
+                System.out.println(v.getPlaca() + "\t" + v.getModelo() + "\t" + v.getMarca());
             }
+        }
+    }
 
-            // 30 - ENTRADA DE VEÍCULO
-            else if (opcao == 30) {
-                System.out.print("\nPlaca para entrada: ");
-                String placaEntrada = teclado.nextLine();
-
-                veiculos vEntrada = null;
-                for (veiculos v : listaVeiculos) {
-                    if (v.placa.equalsIgnoreCase(placaEntrada)) {
-                        vEntrada = v;
-                        break;
-                    }
-                }
-
-                if (vEntrada == null) {
-                    System.out.println("Erro: Veículo não encontrado!\n");
-                } else if (vEntrada.status == 0) {
-                    System.out.println("Atenção: Este veículo já está no pátio!\n");
-                } else {
-                    System.out.println("Veículo: " + vEntrada.modelo + " / " + vEntrada.marca);
-                    System.out.print("Confirma a entrada no pátio? (S/N): ");
-                    String confirmacao = teclado.nextLine();
-
-                    if (confirmacao.equalsIgnoreCase("S")) {
-                        vEntrada.status = 0;   // 0 = Pátio
-                        vEntrada.motorista = ""; // Limpa o motorista
-                        System.out.println("Entrada registrada!\n");
-                    } else {
-                        System.out.println("Operação cancelada.\n");
-                    }
-                }
+    // 20 - Saída de veículo
+    public static void saidaVeiculo() {
+        System.out.print("Digite a placa do veículo para dar saída: ");
+        String placa = teclado.next();
+        
+        boolean encontrado = false;
+        for (veiculos v : listaVeiculos) {
+            if (v.getPlaca().equalsIgnoreCase(placa)) {
+                // Exemplo: remover da lista ou alterar status
+                listaVeiculos.remove(v);
+                System.out.println("Saída registrada/Veículo removido com sucesso!");
+                encontrado = true;
+                break;
             }
+        }
+        if (!encontrado) {
+            System.out.println("Veículo não encontrado com essa placa.");
+        }
+    }
 
-            // 31 - RELATÓRIO NO PÁTIO
-            else if (opcao == 31) {
-                System.out.println("\n--- VEÍCULOS NO PÁTIO ---");
-                System.out.println("Placa    | Modelo       | Marca        | Motorista       | Status  ");
-                System.out.println("-------------------------------------------------------------------");
-                for (veiculos v : listaVeiculos) {
-                    if (v.status == 0) {
-                        System.out.println(v);
-                    }
-                }
-                System.out.println();
-            }
+    // 21 - Relatório em Linha
+    public static void relatorioVeiculoLinha() {
+        System.out.println("\n--- Relatório em Linha ---");
+        for (veiculos v : listaVeiculos) {
+            System.out.println("Placa: " + v.getPlaca() + " | Marca: " + v.getMarca() + " | Modelo: " + v.getModelo());
+        }
+    }
 
-            // 99 - SAIR
-            else if (opcao == 99) {
-                System.out.println("Encerrando o programa...");
-            } else {
-                System.out.println("Opção inválida!\n");
-            }
+    // 30 - Entrada de veículo
+    public static void entrarVeiculo() {
+        System.out.println("Registrar entrada de veículo existente...");
+        // Adicione aqui a regra de negócio específica do seu exercício para 'Entrada'
+    }
 
-        } while (opcao != 99);
-
-        teclado.close();
+    // 31 - Relatório de veículos no pátio
+    public static void relatorioPatio() {
+        System.out.println("\n--- Veículos no Pátio ---");
+        listarVeiculos();
     }
 }
